@@ -20,21 +20,25 @@
 #include <QComboBox>
 #include <QtGlobal>
 #include <QModelIndexList>
+#include <QTableView>
 
 #include "types.h"
 #include "debug.h"
 
-#define	DEFAULT_CONFIG_PATH	QString( qgetenv("HOME") + "/.config/" )
+#define	PLATFORM_CONFIG_PATH	QString( qgetenv("HOME") + "/.config/" )
 
 /* ======================================================================== */
 #include "locals.h"
 
+#ifndef ORGANISATION
+#define ORGANISATION		QString("delBassoDEV")
+#endif
 #ifndef CONFIG_PATH
-	#define CONFIG_PATH	QString( DEFAULT_CONFIG_PATH + PROJECT_NAME )
+#define CONFIG_PATH	QString( PLATFORM_CONFIG_PATH + qAppName() )
 #endif
 
 #ifndef CONFIG_FILE
-	#define CONFIG_FILE	QString( QDir(CONFIG_PATH).absoluteFilePath("config") )
+#define CONFIG_FILE	QString( QDir(CONFIG_PATH).absoluteFilePath("config") )
 #endif
 
 /* ======================================================================== */
@@ -45,7 +49,21 @@
 /* ======================================================================== */
 /*						Global namespace macro definitions								 */
 /* ======================================================================== */
-#define QSETTINGS QSettings config(CONFIG_FILE, QSettings::IniFormat);
+#define DESTRUCTOR_INVOCATION setAttribute(Qt::WA_DeleteOnClose);
+
+#define QSETTINGS  QSettings config;
+//#define QSETTINGS  QSettings config(CONFIG_FILE, QSettings::IniFormat);
+
+#define QSETTINGS_INIT { \
+	QCoreApplication::setOrganizationName(ORGANISATION); \
+	QCoreApplication::setApplicationName(qApp->applicationName()); \
+	QSettings::setDefaultFormat(QSettings::IniFormat); \
+	QSettings cfg; \
+	if (! cfg.allKeys().contains(QString("OrganisationName"))) \
+	cfg.setValue(QString("OrganisationName"), QCoreApplication::organizationName()); \
+	if (! cfg.allKeys().contains(QString("ApplicationName"))) \
+	cfg.setValue(QString("ApplicationName"), QCoreApplication::applicationName()); \
+	}
 
 #define     QSPLT_STORE     { QSETTINGS \
 	QList<QSplitter *> spls = findChildren<QSplitter *>(); \
@@ -81,6 +99,12 @@
  * and the only thing while instance construction ist QWIN_RESTORE;
  * No QSETTINGS, no QSPLT_RESTORE....
  */
+#define     WIN_STORE(obj)	{ QSETTINGS; \
+	config.setValue(obj->objectName() + GEOM, obj->saveGeometry() ); \
+	}
+#define     WIN_RESTORE(obj)	{ QSETTINGS; \
+	obj->restoreGeometry(config.value(obj->objectName() + GEOM,"").toByteArray()); \
+	}
 #define     QWIN_STORE      { QSETTINGS; \
 	QSPLT_STORE; \
 	config.setValue(objectName() + GEOM, saveGeometry() ); \
@@ -136,6 +160,10 @@ struct uID_t;
 /* ======================================================================== */
 int getIndexOfMax(QList<int> in);
 int getIndexOfMin(QList<int> in);
+
+void castToQTableView2(const QList<QObject *>& QObjects, QList<QTableView *>& tvs);
+QList<QTableView *> castToQTableView(const QList<QWidget *> os);
+
 
 /* ======================================================================== */
 /*										Class Globals						                */

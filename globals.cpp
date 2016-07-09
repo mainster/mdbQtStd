@@ -32,7 +32,18 @@ int getIndexOfMin(QList<int> in) {
 QByteArray	Globals::htmlNotify = "<font color=\"Lime\">@</font><br>";
 QFont			Globals::fontStat	= QFont();
 QString		Globals::defaultFontString = "Monospace,9,-1,5,50,0,0,0,0,0";
-//const quint8	Globals::COLS = 8;
+
+
+QList<QTableView *> castToQTableView(const QList<QWidget *> os) {
+	QList<QTableView *> tvs = QList<QTableView *>();
+
+	foreach (QWidget *o, os) {
+		if (qobject_cast<QTableView *>(o))
+			tvs << qobject_cast<QTableView *>(o);
+	}
+
+	return tvs;
+}
 
 
 bool Globals::storeFont(const QByteArray objName, const QFont &font) {
