@@ -24,9 +24,20 @@
 #include "types.h"
 #include "debug.h"
 
-/* #define DEFAULT_CONFIG_PATH */
-/* #define DEFAULT_CONFIG */
+#define	DEFAULT_CONFIG_PATH	QString( qgetenv("HOME") + "/.config/" )
+
+/* ======================================================================== */
 #include "locals.h"
+
+#ifndef CONFIG_PATH
+	#define CONFIG_PATH	QString( DEFAULT_CONFIG_PATH + PROJECT_NAME )
+#endif
+
+#ifndef CONFIG_FILE
+	#define CONFIG_FILE	QString( QDir(CONFIG_PATH).absoluteFilePath("config") )
+#endif
+
+/* ======================================================================== */
 
 #define GEOM QString("/Geometry")
 #define STAT QString("/State")
@@ -34,7 +45,7 @@
 /* ======================================================================== */
 /*						Global namespace macro definitions								 */
 /* ======================================================================== */
-#define QSETTINGS QSettings config(DEFAULT_CONFIG, QSettings::IniFormat);
+#define QSETTINGS QSettings config(CONFIG_FILE, QSettings::IniFormat);
 
 #define     QSPLT_STORE     { QSETTINGS \
 	QList<QSplitter *> spls = findChildren<QSplitter *>(); \
