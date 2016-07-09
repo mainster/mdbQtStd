@@ -23,6 +23,7 @@
 
 #include "types.h"
 #include "debug.h"
+#include "locals.h"
 
 /*#define DEFAULT_CONFIG_PATH QString("/home/mainster/.config/" \
 	+ qgetenv("APP_NAME") \
@@ -35,16 +36,7 @@
 
 //#define MAINWINDOW_TITLE tr(qgetenv("APP_NAME") + qgetenv("APP_VERSION"))
 
-#define MAINWINDOW_TITLE QString(QString("libreTerminal") + QString("0.11"))
 
-#define DEFAULT_CONFIG_PATH QString("/home/mainster/.config/" \
-	+ QString("libreTerminal") \
-	+ QString("0.11"))
-
-#define DEFAULT_CONFIG QString("/home/mainster/.config/" \
-	+ QString("libreTerminal") \
-	+ QString("0.11") \
-	+ QString("/config"))
 
 #define GEOM QString("/Geometry")
 #define STAT QString("/State")
@@ -141,8 +133,6 @@ int getIndexOfMin(QList<int> in);
 
 struct ItemStyle;
 struct uID_t;
-
-
 
 /*!
  * do-while() loop is a trick to let you define multi-statement macros and
