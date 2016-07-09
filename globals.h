@@ -23,43 +23,21 @@
 
 #include "types.h"
 #include "debug.h"
+
+/* #define DEFAULT_CONFIG_PATH */
+/* #define DEFAULT_CONFIG */
 #include "locals.h"
-
-/*#define DEFAULT_CONFIG_PATH QString("/home/mainster/.config/" \
-	+ qgetenv("APP_NAME") \
-	+ qgetenv("APP_VERSION"))*/
-
-/*#define DEFAULT_CONFIG QString("/home/mainster/.config/" \
-	+ qgetenv("APP_NAME") \
-	+ qgetenv("APP_VERSION") \
-	+ "/config")*/
-
-//#define MAINWINDOW_TITLE tr(qgetenv("APP_NAME") + qgetenv("APP_VERSION"))
-
-
 
 #define GEOM QString("/Geometry")
 #define STAT QString("/State")
 
 #define QSETTINGS QSettings config(DEFAULT_CONFIG, QSettings::IniFormat);
-//#define QSETTINGS_TBL QSettings configTbl(CONFIG_PATH + QString("_tbl"), QSettings::IniFormat);
-//#define QSETTINGS_QUERYS QSettings configQ(CUSTOM_QUERYS_PATH, QSettings::IniFormat);
 
 #define     QSPLT_STORE     { QSETTINGS \
 	QList<QSplitter *> spls = findChildren<QSplitter *>(); \
 	foreach (QSplitter *sp, spls) \
 	config.setValue(objectName() + "/" + sp->objectName(), sp->saveState()); \
 	}
-/*#define     QACTION_STORE( obj )     { QSETTINGS \
-	QList<QAction *> acts = obj->findChildren<QAction *>(QString(), Qt::FindDirectChildrenOnly); \
-	foreach (QAction *act, acts) \
-	config.setValue(obj->objectName() + "/" + act.objectName(), act.isChecked()); \
-	}
-#define     QACTION_RESTORE( obj )     { QSETTINGS \
-	QList<QAction *> acts = obj->findChildren<QAction *>(QString(), Qt::FindDirectChildrenOnly); \
-	foreach (QAction *act, acts) \
-	act.setChecked( config.value(obj->objectName() + "/" + act.objectName(), false).toBool()); \
-	}*/
 #define     QACTION_STORE     { QSETTINGS \
 	QList<QAction *> acts = findChildren<QAction *>(QString(), Qt::FindDirectChildrenOnly); \
 	foreach (QAction *act, acts) \
@@ -98,12 +76,6 @@
 	QSPLT_RESTORE; \
 	}
 
-/**********************************************************************//**
- *		Globals
- **************************************************************************/
-
-//#define _(x) std::cout << #x << std::endl; x
-//#define SHOW(a) std::cout << #a << ": " << (a) << std::endl
 #define VNAM(name) (QString(#name) \
 	.replace(QString("->"), QString(".")) \
 	.remove(QRegExp("\\(\\)")))
