@@ -31,6 +31,9 @@
 #define GEOM QString("/Geometry")
 #define STAT QString("/State")
 
+/* ======================================================================== */
+/*						Global namespace macro definitions								 */
+/* ======================================================================== */
 #define QSETTINGS QSettings config(DEFAULT_CONFIG, QSettings::IniFormat);
 
 #define     QSPLT_STORE     { QSETTINGS \
@@ -100,9 +103,6 @@
 #define QT_MESSAGE_PATTERN_DEFAULT "%{if-category}%{category}: %{endif}%{message}"
 #define QT_MESSAGE_PATTERN_FILE_LINE "%{if-category}%{category}: %{endif}%{file}(%{line})%{message}"
 
-int getIndexOfMax(QList<int> in);
-int getIndexOfMin(QList<int> in);
-
 struct ItemStyle;
 struct uID_t;
 
@@ -120,9 +120,14 @@ struct uID_t;
 	? ( WARN << QString("Invalid index: %1(%2):").arg(__func__).arg(__LINE__), true ) \
 	: ( false ) )
 
+/* ======================================================================== */
+/*						Global namespace function declaration							 */
+/* ======================================================================== */
+int getIndexOfMax(QList<int> in);
+int getIndexOfMin(QList<int> in);
 
 /* ======================================================================== */
-/*                     Class Globals						                      */
+/*										Class Globals						                */
 /* ======================================================================== */
 class Globals {
 
