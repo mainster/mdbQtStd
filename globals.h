@@ -212,6 +212,7 @@ public:  /** Declarations */
 	static QList<int> seqRandi(		int count,		int minVal = 0, int maxVal = 100, int seed = 99);
 	static QList<quint8> seqRandui(	int count, quint8	 minVal = 0, quint8 maxVal = 100, int seed = 99);
 	static QVariant seq(QVariant v, quint16 count, qint16 lBound = 0, qint16 step = 1) {
+		Q_UNUSED(lBound);Q_UNUSED(step);
 		QStringList l;
 
 		if (! QString("QString").compare(v.typeName())) {
