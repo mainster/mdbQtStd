@@ -138,6 +138,9 @@
 #define QT_MESSAGE_PATTERN_DEFAULT "%{if-category}%{category}: %{endif}%{message}"
 #define QT_MESSAGE_PATTERN_FILE_LINE "%{if-category}%{category}: %{endif}%{file}(%{line})%{message}"
 
+/*!
+ * Maybe this forward declaration leads in problems so keep it in mind
+ */
 struct ItemStyle;
 struct uID_t;
 
