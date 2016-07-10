@@ -34,7 +34,7 @@
 #define ORGANISATION		QString("delBassoDEV")
 #endif
 #ifndef CONFIG_PATH
-#define CONFIG_PATH	QString( PLATFORM_CONFIG_PATH + qAppName() )
+#define CONFIG_PATH	QString( PLATFORM_CONFIG_PATH + ORGANISATION )
 #endif
 
 #ifndef CONFIG_FILE
@@ -231,7 +231,7 @@ public:  /** Declarations */
 		}
 		return l;
 	};
-	static QList<quint8> seqUInt(quint8 i, int count, int lBound, int step);
+	static QList<quint8> seqUInt(quint8 i, int count, int lBound = 0, int step = 0);
 
 public slots:
 	static bool storeFont(const QByteArray objName, const QFont &font);
