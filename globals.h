@@ -213,7 +213,7 @@ public:  /** Declarations */
 	static QStringList seqString(		QString str,	int count,		int lBound = 0, int step = 1);
 	static QList<QFont> seqFont(		QFont font,		int count,		int lBound = 0, int step = 1);
 	static QList<QColor> seqColor(	QColor color,	int count,		int lBound = 0, int step = 1);
-	static QList<quint8> seqInt(		quint8 i,		int count,		int lBound = 0, int step = 1);
+	static QList<int> seqInt( int i,		int count,		int lBound = 0, int step = 1);
 	static QList<ItemStyle> seqItemStyle(	ItemStyle s,	int count,		int lBound = 0, int step = 1);
 	static QList<int> seqRandi(		int count,		int minVal = 0, int maxVal = 100, int seed = 99);
 	static QList<quint8> seqRandui(	int count, quint8	 minVal = 0, quint8 maxVal = 100, int seed = 99);
@@ -231,6 +231,7 @@ public:  /** Declarations */
 		}
 		return l;
 	};
+	static QList<quint8> seqUInt(quint8 i, int count, int lBound, int step);
 
 public slots:
 	static bool storeFont(const QByteArray objName, const QFont &font);

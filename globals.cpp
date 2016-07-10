@@ -71,8 +71,15 @@ QFont Globals::restoreFont(const QString objName, bool *ok) {
 
 	return fontStat;
 }
-QList<quint8> Globals::seqInt(quint8 i, int count, int lBound, int step) {
+QList<quint8> Globals::seqUInt(quint8 i, int count, int lBound, int step) {
 	QList<quint8> il;
+	for (int k=lBound; k<count; k+=step) {
+		il << i;
+	}
+	return il;
+}
+QList<int> Globals::seqInt(int i, int count, int lBound, int step) {
+	QList<int> il;
 	for (int k=lBound; k<count; k+=step) {
 		il << i;
 	}
