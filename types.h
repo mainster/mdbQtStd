@@ -41,6 +41,18 @@ void resizeList(QList<T> & list, int newSize) {
 	 } else if (diff < 0) list.erase(list.end() + diff, list.end());
 }
 
+template<class T>
+QString listToString(QList<T> list, int fieldwidth = 1, int base = 10,
+							QChar fillChar = '0', char joinSep = "", bool appendLength = true) {
+	QStringList s;
+	foreach (T t, list) {
+		s << QString("%1").arg(t, fieldwidth, base, fillChar);
+	}
+	return (appendLength)
+			? s.join(joinSep) + QString(" [length: %1]").arg(s.length())
+			: s.join(joinSep);
+}
+
 /* ======================================================================== */
 /*										u_ID_t						                      */
 /* ======================================================================== */
@@ -137,6 +149,11 @@ public:
 				 qreal width = 1, Qt::PenStyle style = Qt::SolidLine) : mIndexList(indexList) {
 		mPen = QPen(QBrush(color), width, style);
 	}
+	ItemStyle(const QModelIndex topLeft, const int count, QColor color,
+				 qreal width = 1, Qt::PenStyle style = Qt::SolidLine) {
+		mPen = QPen(QBrush(color), width, style);
+		appendIndexRng(topLeft, count);
+	}
 	ItemStyle(QList<int> addrRng, QColor color,
 				 qreal width = 1, Qt::PenStyle style = Qt::SolidLine) : mAddrRng(addrRng)  {
 		color.setAlphaF(.1);
@@ -173,6 +190,16 @@ public:
 	}
 	void setAddrRng(const QList<int> &addrRng) {
 		mAddrRng = addrRng;
+	}
+	void appendIndexRng(const QModelIndex mi, const int count) {
+		int r = mi.row();
+		int c = mi.column();
+		for (int k = 0; k < count; k++) {
+			if (! mi.sibling(r, c).isValid()) {
+				c = 0; r++;
+			}
+			mIndexList << mi.sibling(r, c++);
+		}
 	}
 
 private:

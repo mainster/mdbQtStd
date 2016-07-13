@@ -67,6 +67,7 @@ QString dbgFuncNameMdb(QString name);
 //#define TOC()	(Q_INFO << tr("toc 1: %1:%2").arg( QTime::currentTime().second() ).arg( QTime::currentTime().msec() ))
 
 #define TIC TicToc::tic(tr("try 1"));
+#define TICs(s) TicToc::tic(tr(s));
 #define TOC TicToc::toc();
 
 
