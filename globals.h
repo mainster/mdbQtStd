@@ -41,6 +41,7 @@
 #define CONFIG_FILE	QString( QDir(CONFIG_PATH).absoluteFilePath("config") )
 #endif
 
+#define CUSTOM_QUERYS_PATH QString(CONFIG_PATH + qApp->applicationName() + "customQuerys")
 /* ======================================================================== */
 
 #define GEOM QString("/Geometry")
@@ -52,7 +53,7 @@
 #define DESTRUCTOR_INVOCATION setAttribute(Qt::WA_DeleteOnClose);
 
 #define QSETTINGS  QSettings config;
-//#define QSETTINGS  QSettings config(CONFIG_FILE, QSettings::IniFormat);
+#define QSETTINGS_QUERYS QSettings configQ(CUSTOM_QUERYS_PATH, QSettings::IniFormat);
 
 #define QSETTINGS_INIT { \
 	QCoreApplication::setOrganizationName(ORGANISATION); \
