@@ -28,7 +28,7 @@
 #define	PLATFORM_CONFIG_PATH	QString( qgetenv("HOME") + "/.config/" )
 
 /* ======================================================================== */
-#include "locals.h"
+//#include "locals.h"
 
 #ifndef ORGANISATION
 #define ORGANISATION		QString("delBassoDEV")
