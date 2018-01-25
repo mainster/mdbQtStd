@@ -8,7 +8,7 @@
 #include <QMetaType>
 //#include <QMainWindow>
 
-#include "globals.h"
+#include "mdbQtStd.h"
 #include "types.h"
 
 QString Globals::ddgbStyleShtA = "QGroupBox {"

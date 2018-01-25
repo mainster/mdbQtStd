@@ -23,20 +23,18 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-debug.cpp \
-globals.cpp \
-#mdbqtstd.cpp \
-mdstatebar.cpp \
-types.cpp \
-	globalsui.cpp
+		debug.cpp \
+		mdstatebar.cpp \
+		types.cpp \
+		globalsui.cpp \
+		mdbQtStd.cpp
 
 HEADERS += \
-types.h \
-debug.h \
-globals.h \
-#mdbqtstd.h \
-mdstatebar.h \
-	globalsui.h
+		types.h \
+		debug.h \
+		mdstatebar.h \
+		globalsui.h \
+		mdbQtStd.h
 
 unix {
 target.path = /usr/lib
@@ -44,7 +42,7 @@ INSTALLS += target
 }
 
 SUBDIRS += \
-mdbQtStd.pro
+		mdbQtStd.pro
 
 DISTFILES +=
 

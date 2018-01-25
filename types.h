@@ -13,7 +13,7 @@
 #include <QItemSelection>
 #include <QPen>
 #include "debug.h"
-#include "globals.h"
+#include "mdbQtStd.h"
 
 
 namespace Qt {

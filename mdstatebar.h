@@ -15,7 +15,7 @@
 #include <QVector>
 #include <QWidget>
 
-#include "globals.h"
+#include "mdbQtStd.h"
 #include "debug.h"
 
 #define type_clock  3
@@ -57,31 +57,31 @@ public slots:
 	void clearError();
 	void clearMessage();
 	void clearInfo();
-   void clearClock();
+	void clearClock();
 
 	void setClockVisible(const bool onoff, const int slotNo = -1);
 
 private slots:
-   void onCyclic();
+	void onCyclic();
 
 private:
-   static int PRIVATE_REFRESH_INTERVAL;
-   static MDStateBar *inst;
-   QList<QLabel *> mslot;
-   QTimer *timMsg;
+	static int PRIVATE_REFRESH_INTERVAL;
+	static MDStateBar *inst;
+	QList<QLabel *> mslot;
+	QTimer *timMsg;
 
-   typedef struct {
+	typedef struct {
 		QList<QString> str;
 	} prefix_t;
 	prefix_t prefix;
 
-   typedef struct {
-       QDate date;
-       QTime time;
-       bool visible;
-       int slotNo;
-   } clock_t;
-   clock_t clock;
+	typedef struct {
+		 QDate date;
+		 QTime time;
+		 bool visible;
+		 int slotNo;
+	} clock_t;
+	clock_t clock;
 
 };
 
