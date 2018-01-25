@@ -1,5 +1,5 @@
-#ifndef GLOBALS_H
-#define GLOBALS_H
+#ifndef MDBQTSTD_H
+#define MDBQTSTD_H
 
 #include <QtCore>
 #include <QTypeInfo>
@@ -158,7 +158,7 @@ int getIndexOfMin(QList<int> in);
 /* ======================================================================== */
 /*										Class Globals						                */
 /* ======================================================================== */
-class Globals {
+class MdbQtStd final {
 
 public:  /** Declarations */
 
@@ -176,10 +176,10 @@ public:  /** Declarations */
 	 static QByteArray
 	 htmlNotify;
 
-	 explicit Globals() {}
-	 static Globals *getObjectPtr() {
+	 explicit MdbQtStd() { INFO << QString("Hiii"); }
+	 static MdbQtStd *getObjectPtr() {
 		  if(inst == 0)
-				inst = new Globals();
+				inst = new MdbQtStd();
 		  return inst;
 
 	 }
@@ -195,9 +195,7 @@ public:  /** Declarations */
 							  .replace("@MSG_BODY@", msgBody);
 		  proc.start(STR_NOTIFY);
 	 }
-	 static QStringList widToStrLst(QWidgetList &lst);
 	 static QStringList objToStrLst(QObjectList &lst);
-	 static QString widToStr(QWidgetList &lst, QString sep = ",");
 	 static QString objToStr(QObjectList &lst, QString sep = ",");
 
 	 static QStringList seqString(		QString str,	int count,		int lBound = 0, int step = 1);
@@ -230,13 +228,13 @@ public slots:
 	 static QFont restoreFont(const QString objName, bool *ok = 0);
 
 private:
-	 static Globals * inst;
+	 static MdbQtStd * inst;
 	 QProcess proc;
 	 QString S_STR_NOTIFY;
-	 static QStringList strLst;
 	 static QFont		fontStat;
 	 static QFontInfo	*fontInfo;
+	 static QStringList strLst;
 
 };
 
-#endif // GLOBALS_H
+#endif // MdbQtStd_H

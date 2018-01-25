@@ -11,7 +11,7 @@
 #include "mdbQtStd.h"
 #include "types.h"
 
-QString Globals::ddgbStyleShtA = "QGroupBox {"
+QString MdbQtStd::ddgbStyleShtA = "QGroupBox {"
 		"background-color: qlineargradient("
 		"x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #E0E0E0, stop: 1 #FFFFFF);"
 		"border: 2px solid gray; border-radius: 5px;"
@@ -25,7 +25,7 @@ QString Globals::ddgbStyleShtA = "QGroupBox {"
 		"background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,"
 		"stop: 0 #FFOECE, stop: 1 #FFFFFF);}";
 
-QString Globals::ddgbCheckableStyleSht =
+QString MdbQtStd::ddgbCheckableStyleSht =
 		" QGroupBox::indicator {"
 		"    width: 13px;"
 		"    height: 13px;"
@@ -47,7 +47,7 @@ QString Globals::ddgbCheckableStyleSht =
 		"background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,"
 		"stop: 0 #FFOECE, stop: 1 #FFFFFF);}";
 
-QString Globals::ddgbStyleShtInpFrm =
+QString MdbQtStd::ddgbStyleShtInpFrm =
 		" QGroupBox {"
 		"   background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,"
 		"   stop: 0 #E0E0E0, stop: 1 #FFFFFF);"
@@ -62,7 +62,7 @@ QString Globals::ddgbStyleShtInpFrm =
 		"   padding: 0 3px"
 		" }";
 
-QString Globals::ddtvStyleShtA =
+QString MdbQtStd::ddtvStyleShtA =
 		" QTableView{"
 		"  background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #E0E0E0, stop: 1 #FFFFFF);"
 		"  border: 0px solid gray;"
@@ -70,7 +70,7 @@ QString Globals::ddtvStyleShtA =
 		"  margin-top: 10px; /* leave space at the top for the title */"
 		"}";
 
-QString Globals::ddgbStyleShtCenterHead =
+QString MdbQtStd::ddgbStyleShtCenterHead =
 	  " QGroupBox {"
 	  "      background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #E0E0E0, stop: 1 #FFFFFF);"
 	  "      border: 2px solid gray;"
@@ -88,7 +88,7 @@ QString Globals::ddgbStyleShtCenterHead =
 	  "   padding: 0px 6px"
 	  " }";
 
-QString Globals::gbStyleShtCenterPROPERTYS =
+QString MdbQtStd::gbStyleShtCenterPROPERTYS =
 		"QGroupBox#tva[selected=false] { border: 2px solid gray;  }"
 		"QGroupBox#tva[selected=true] { border: 1px dashed rgb(55, 55, 55);   }"
 		""
@@ -116,8 +116,8 @@ QString Globals::gbStyleShtCenterPROPERTYS =
 		"   top: 3px;   "
 		"   padding: 0px 6px"
 		"} ";
-QStringList Globals::strLst = QStringList();
 
+QStringList MdbQtStd::strLst = QStringList();
 
 int getIndexOfMax(QList<int> in) {
 	std::vector<int>::iterator res;
@@ -134,22 +134,21 @@ int getIndexOfMin(QList<int> in) {
 	return std::distance(in.toVector().toStdVector().begin(), res);
 }
 
-QByteArray	Globals::htmlNotify = "<font color=\"Lime\">@</font><br>";
-QFont			Globals::fontStat	= QFont();
-QString		Globals::defaultFontString = "Monospace,9,-1,5,50,0,0,0,0,0";
+QByteArray	MdbQtStd::htmlNotify = "<font color=\"Lime\">@</font><br>";
+QFont			MdbQtStd::fontStat	= QFont();
+QString		MdbQtStd::defaultFontString = "Monospace,9,-1,5,50,0,0,0,0,0";
 
-
-bool Globals::storeFont(const QByteArray objName, const QFont &font) {
+bool MdbQtStd::storeFont(const QByteArray objName, const QFont &font) {
 	QSETTINGS;
 	config.setValue(objName + "/lastFont", font.toString());
 	return true;
 }
-bool Globals::storeFont(const QString objName, const QFont &font) {
+bool MdbQtStd::storeFont(const QString objName, const QFont &font) {
 	QSETTINGS;
 	config.setValue(objName + "/lastFont", font.toString());
 	return true;
 }
-QFont Globals::restoreFont(const QString objName, bool *ok) {
+QFont MdbQtStd::restoreFont(const QString objName, bool *ok) {
 	QSETTINGS;
 	Q_UNUSED(ok)
 
@@ -164,33 +163,14 @@ QFont Globals::restoreFont(const QString objName, bool *ok) {
 
 	return fontStat;
 }
-QList<quint8> Globals::seqUInt(quint8 i, int count, int lBound, int step) {
+QList<quint8> MdbQtStd::seqUInt(quint8 i, int count, int lBound, int step) {
 	QList<quint8> il;
 	for (int k=lBound; k<count; k+=step) {
 		il << i;
 	}
 	return il;
 }
-
-QStringList Globals::widToStrLst(QWidgetList &lst) {
-
-	strLst.clear();
-	foreach (QWidget *w, lst) {
-		strLst << w->objectName();
-	}
-	return strLst;
-}
-
-QString Globals::widToStr(QWidgetList &lst, QString sep) {
-
-	strLst.clear();
-	foreach (QWidget *w, lst) {
-		strLst << w->objectName();
-	}
-	return strLst.join(sep);
-}
-
-QStringList Globals::objToStrLst(QObjectList &lst) {
+QStringList MdbQtStd::objToStrLst(QObjectList &lst) {
 
 	strLst.clear();
 	foreach (QObject *o, lst) {
@@ -198,8 +178,7 @@ QStringList Globals::objToStrLst(QObjectList &lst) {
 	}
 	return strLst;
 }
-
-QString Globals::objToStr(QObjectList &lst, QString sep) {
+QString MdbQtStd::objToStr(QObjectList &lst, QString sep) {
 
 	strLst.clear();
 	foreach (QObject *o, lst) {
@@ -207,14 +186,14 @@ QString Globals::objToStr(QObjectList &lst, QString sep) {
 	}
 	return strLst.join(sep);
 }
-QList<int> Globals::seqInt(int i, int count, int lBound, int step) {
+QList<int> MdbQtStd::seqInt(int i, int count, int lBound, int step) {
 	QList<int> il;
 	for (int k=lBound; k<count; k+=step) {
 		il << i;
 	}
 	return il;
 }
-QList<int> Globals::seqRandi( int count, int minVal, int maxVal, int seed) {
+QList<int> MdbQtStd::seqRandi( int count, int minVal, int maxVal, int seed) {
 	Q_UNUSED(minVal);Q_UNUSED(maxVal);Q_UNUSED(seed);
 
 	QList<int> il;
@@ -223,7 +202,7 @@ QList<int> Globals::seqRandi( int count, int minVal, int maxVal, int seed) {
 	}
 	return il;
 }
-QList<quint8> Globals::seqRandui( int count, quint8 minVal, quint8 maxVal, int seed) {
+QList<quint8> MdbQtStd::seqRandui( int count, quint8 minVal, quint8 maxVal, int seed) {
 	Q_UNUSED(minVal);Q_UNUSED(maxVal);Q_UNUSED(seed);
 
 	QList<quint8> il;
@@ -232,7 +211,7 @@ QList<quint8> Globals::seqRandui( int count, quint8 minVal, quint8 maxVal, int s
 	}
 	return il;
 }
-QStringList Globals::seqString(QString str, int count, int lBound, int step) {
+QStringList MdbQtStd::seqString(QString str, int count, int lBound, int step) {
 	QStringList sl;
 	for (int k=lBound; k<count; k+=step) {
 		if (str.contains("%"))
@@ -242,20 +221,20 @@ QStringList Globals::seqString(QString str, int count, int lBound, int step) {
 	}
 	return sl;
 }
-QList<QFont> Globals::seqFont(QFont font, int count, int lBound, int step) {
+QList<QFont> MdbQtStd::seqFont(QFont font, int count, int lBound, int step) {
 	QList<QFont> fl;
 	for (int k=lBound; k<count; k+=step)
 		fl << font;
 	return fl;
 }
-QList<ItemStyle> Globals::seqItemStyle(ItemStyle s, int count, int lBound, int step) {
+QList<ItemStyle> MdbQtStd::seqItemStyle(ItemStyle s, int count, int lBound, int step) {
 	QList<ItemStyle> bl;
 	for (int k=lBound; k<count; k+=step) {
 		bl << s;
 	}
 	return bl;
 }
-QList<QColor> Globals::seqColor(QColor color, int count, int lBound, int step) {
+QList<QColor> MdbQtStd::seqColor(QColor color, int count, int lBound, int step) {
 	QList<QColor> cl;
 	for (int k=lBound; k<count; k+=step)
 		cl << color;

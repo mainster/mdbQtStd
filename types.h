@@ -5,13 +5,14 @@
 #include <QVariant>
 #include <QMetaObject>
 #include <QTypeInfo>
-#include <QtGui>
+//#include <QtGui>
 #include <QString>
 #include <QObject>
 #include <QMetaType>
-#include <QMainWindow>
+//#include <QMainWindow>
 #include <QItemSelection>
 #include <QPen>
+#include <QFont>
 #include "debug.h"
 #include "mdbQtStd.h"
 

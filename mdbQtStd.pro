@@ -36,13 +36,13 @@ HEADERS += \
 		globalsui.h \
 		mdbQtStd.h
 
-unix {
-target.path = /usr/lib
-INSTALLS += target
-}
+#unix {
+#target.path = /usr/lib
+#INSTALLS += target
+#}
 
-SUBDIRS += \
-		mdbQtStd.pro
+#SUBDIRS += \
+#		mdbQtStd.pro
 
-DISTFILES +=
+#DISTFILES +=
 

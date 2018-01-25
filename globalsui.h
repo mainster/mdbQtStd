@@ -28,8 +28,12 @@ class globalsUi
 public:
 	globalsUi();
 	void castToQTableView2(const QList<QObject *>& QObjects, QList<QTableView *>& tvs);
+	static QStringList widToStrLst(QWidgetList &lst);
+	static QString widToStr(QWidgetList &lst, QString sep = ",");
 	QList<QTableView *> castToQTableView(const QList<QWidget *> os);
 
+private:
+	static QStringList strLst;
 
 };
 
