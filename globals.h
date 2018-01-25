@@ -1,29 +1,17 @@
 #ifndef GLOBALS_H
 #define GLOBALS_H
 
-//#include <QWidget>
-#include <QVariant>
+#include <QtCore>
 #include <QTypeInfo>
-#include <QTime>
-#include <QtGui>
-#include <QtCore/QtGlobal>
-#include <QString>
-#include <QSplitter>
-#include <QSettings>
-#include <QRect>
-#include <QProcess>
 #include <QObject>
 #include <QMetaType>
-#include <QMainWindow>
-#include <QFont>
 #include <QDebug>
-#include <QComboBox>
-#include <QtGlobal>
-#include <QModelIndexList>
-#include <QTableView>
 
 #include "types.h"
 #include "debug.h"
+
+//#include <QVariant>
+//#include <QtGlobal>
 
 #define	PLATFORM_CONFIG_PATH	QString( qgetenv("HOME") + "/.config/" )
 
@@ -142,7 +130,7 @@
 /*!
  * Maybe this forward declaration leads in problems so keep it in mind
  */
-struct ItemStyle;
+class ItemStyle;
 struct uID_t;
 
 /*!
@@ -165,8 +153,6 @@ struct uID_t;
 int getIndexOfMax(QList<int> in);
 int getIndexOfMin(QList<int> in);
 
-void castToQTableView2(const QList<QObject *>& QObjects, QList<QTableView *>& tvs);
-QList<QTableView *> castToQTableView(const QList<QWidget *> os);
 
 
 /* ======================================================================== */
@@ -177,78 +163,79 @@ class Globals {
 public:  /** Declarations */
 
 
-	static QString
-	ddgbStyleShtA,
-	ddgbStyleShtInpFrm,
-	ddgbCheckableStyleSht,
-	ddtvStyleShtA,
-	ddgbStyleShtCenterHead,
-	gbStyleShtCenterPROPERTYS,
-	STR_NOTIFY,
-	defaultFontString;
+	 static QString
+	 ddgbStyleShtA,
+	 ddgbStyleShtInpFrm,
+	 ddgbCheckableStyleSht,
+	 ddtvStyleShtA,
+	 ddgbStyleShtCenterHead,
+	 gbStyleShtCenterPROPERTYS,
+	 STR_NOTIFY,
+	 defaultFontString;
 
-	static QByteArray
-	htmlNotify;
+	 static QByteArray
+	 htmlNotify;
 
-	explicit Globals() {}
-	static Globals *getObjectPtr() {
-		if(inst == 0)
-			inst = new Globals();
-		return inst;
+	 explicit Globals() {}
+	 static Globals *getObjectPtr() {
+		  if(inst == 0)
+				inst = new Globals();
+		  return inst;
 
-	}
+	 }
 
-	void notify_os(QString msgBody,
-						QString msgHead = "Globals",
-						QString msgTime = "2000") {
+	 void notify_os(QString msgBody,
+						 QString msgHead = "Globals",
+						 QString msgTime = "2000") {
 
-		S_STR_NOTIFY = STR_NOTIFY
-							.replace("@MSG_TIME@", msgTime)
-							.replace("@APP@","SQL browser")
-							.replace("@MSG_HEAD@", msgHead)
-							.replace("@MSG_BODY@", msgBody);
-		proc.start(STR_NOTIFY);
-	}
-	static QStringList widToStrLst(QWidgetList &lst);
-	static QStringList objToStrLst(QObjectList &lst);
-	static QString widToStr(QWidgetList &lst, QString sep = ",");
-	static QString objToStr(QObjectList &lst, QString sep = ",");
+		  S_STR_NOTIFY = STR_NOTIFY
+							  .replace("@MSG_TIME@", msgTime)
+							  .replace("@APP@","SQL browser")
+							  .replace("@MSG_HEAD@", msgHead)
+							  .replace("@MSG_BODY@", msgBody);
+		  proc.start(STR_NOTIFY);
+	 }
+	 static QStringList widToStrLst(QWidgetList &lst);
+	 static QStringList objToStrLst(QObjectList &lst);
+	 static QString widToStr(QWidgetList &lst, QString sep = ",");
+	 static QString objToStr(QObjectList &lst, QString sep = ",");
 
-	static QStringList seqString(		QString str,	int count,		int lBound = 0, int step = 1);
-	static QList<QFont> seqFont(		QFont font,		int count,		int lBound = 0, int step = 1);
-	static QList<QColor> seqColor(	QColor color,	int count,		int lBound = 0, int step = 1);
-	static QList<int> seqInt( int i,		int count,		int lBound = 0, int step = 1);
-	static QList<ItemStyle> seqItemStyle(	ItemStyle s,	int count,		int lBound = 0, int step = 1);
-	static QList<int> seqRandi(		int count,		int minVal = 0, int maxVal = 100, int seed = 99);
-	static QList<quint8> seqRandui(	int count, quint8	 minVal = 0, quint8 maxVal = 100, int seed = 99);
-	static QVariant seq(QVariant v, quint16 count, qint16 lBound = 0, qint16 step = 1) {
-		Q_UNUSED(lBound);Q_UNUSED(step);
-		QStringList l;
+	 static QStringList seqString(		QString str,	int count,		int lBound = 0, int step = 1);
+	 static QList<QFont> seqFont(		QFont font,		int count,		int lBound = 0, int step = 1);
+	 static QList<QColor> seqColor(	QColor color,	int count,		int lBound = 0, int step = 1);
+	 static QList<int> seqInt( int i,		int count,		int lBound = 0, int step = 1);
+	 static QList<ItemStyle> seqItemStyle(	ItemStyle s,	int count,		int lBound = 0, int step = 1);
+	 static QList<int> seqRandi(		int count,		int minVal = 0, int maxVal = 100, int seed = 99);
+	 static QList<quint8> seqRandui(	int count, quint8	 minVal = 0, quint8 maxVal = 100, int seed = 99);
+	 static QVariant seq(QVariant v, quint16 count, qint16 lBound = 0, qint16 step = 1) {
+		  Q_UNUSED(lBound);
+		  Q_UNUSED(step);
+		  QStringList l;
 
-		if (! QString("QString").compare(v.typeName())) {
-			for (int k = lBound; k < count; k++) {
-				if (v.value<QString>().contains("%"))
-					l << v.value<QString>().arg(k);
-				else
-					l << v.value<QString>();
-			}
-		}
-		return l;
-	};
-	static QList<quint8> seqUInt(quint8 i, int count, int lBound = 0, int step = 0);
+		  if (! QString("QString").compare(v.typeName())) {
+				for (int k = lBound; k < count; k++) {
+					 if (v.value<QString>().contains("%"))
+						  l << v.value<QString>().arg(k);
+					 else
+						  l << v.value<QString>();
+				}
+		  }
+		  return l;
+	 };
+	 static QList<quint8> seqUInt(quint8 i, int count, int lBound = 0, int step = 0);
 
 public slots:
-	static bool storeFont(const QByteArray objName, const QFont &font);
-	static bool storeFont(const QString objName, const QFont &font);
-	static QFont restoreFont(const QString objName, bool *ok = 0);
+	 static bool storeFont(const QByteArray objName, const QFont &font);
+	 static bool storeFont(const QString objName, const QFont &font);
+	 static QFont restoreFont(const QString objName, bool *ok = 0);
 
 private:
-	static Globals * inst;
-	QProcess proc;
-	QString S_STR_NOTIFY;
-	static QStringList strLst;
-	static QFont		fontStat;
-	static QFontInfo	*fontInfo;
+	 static Globals * inst;
+	 QProcess proc;
+	 QString S_STR_NOTIFY;
+	 static QStringList strLst;
+	 static QFont		fontStat;
+	 static QFontInfo	*fontInfo;
 
 };
 
