@@ -178,7 +178,7 @@ public:  /** Declarations */
 
 	 explicit MdbQtStd() { INFO << QString("Hiii"); }
 	 static MdbQtStd *getObjectPtr() {
-		  if(inst == 0)
+		  if(inst == nullptr)
 				inst = new MdbQtStd();
 		  return inst;
 
@@ -219,13 +219,13 @@ public:  /** Declarations */
 				}
 		  }
 		  return l;
-	 };
+	 }
 	 static QList<quint8> seqUInt(quint8 i, int count, int lBound = 0, int step = 0);
 
 public slots:
 	 static bool storeFont(const QByteArray objName, const QFont &font);
 	 static bool storeFont(const QString objName, const QFont &font);
-	 static QFont restoreFont(const QString objName, bool *ok = 0);
+	 static QFont restoreFont(const QString objName, bool *ok = nullptr);
 
 private:
 	 static MdbQtStd * inst;
