@@ -1,13 +1,14 @@
-#ifndef MDBQTSTD_H
-#define MDBQTSTD_H
+#ifndef MdbQtStd_H
+#define MdbQtStd_H
 
 #include <QtCore>
 #include <QTypeInfo>
 #include <QObject>
 #include <QMetaType>
 #include <QDebug>
+#include <QFontInfo>
 
-#include "types.h"
+//#include "types.h"
 #include "debug.h"
 
 //#include <QVariant>

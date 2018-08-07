@@ -45,7 +45,7 @@ void resizeList(QList<T> & list, int newSize) {
 
 template<class T>
 QString listToString(QList<T> list, int fieldwidth = 1, int base = 10,
-							QChar fillChar = '0', char joinSep = "", bool appendLength = true) {
+							QChar fillChar = '0', char joinSep = ' ', bool appendLength = true) {
 	QStringList s;
 	foreach (T t, list) {
 		s << QString("%1").arg(t, fieldwidth, base, fillChar);
@@ -63,6 +63,7 @@ QList<U> listCast (QList<T> ts) {
 	}
 	return us;
 }
+
 
 
 
@@ -306,9 +307,8 @@ public:
 			default:							return QVariant();
 		}
 	}
-	/*!
-	 * Protected Item:: member attributes
-	 */
+	// Protected Item:: member attributes
+
 protected:
 	quint8		m_fram;
 	QFont			m_font;
@@ -318,37 +318,7 @@ protected:
 
 Q_DECLARE_METATYPE(Item)
 
-
-
-#ifdef OLD_ITM
-struct ItemStyle {
-
-public:
-	ItemStyle() {}
-	ItemStyle(const ItemStyle &other) {
-		mSelect = other.mSelect;
-		mPen = other.mPen;
-	}
-	ItemStyle(QItemSelectionRange select, QPen pen)  :  mSelect(select), mPen(pen) { }
-	ItemStyle(QItemSelectionRange select, QColor color, qreal width = 1,
-				 Qt::PenStyle style = Qt::SolidLine)  :  mSelect(select) {
-		mPen = QPen(QBrush(color), width, style);
-	}
-	~ItemStyle(){}
-
-	QItemSelection getSelected() const { return mSelect; }
-	void setSelected(const QItemSelection &value) { mSelect = value; }
-
-	void setPen(const QPen &pen) { mPen = pen; }
-	void setColor(const QColor &color) { mPen.color() = color; }
-
-	QPen *pen = &mPen;
-
-private:
-	QItemSelection mSelect;
-	QPen mPen;
-};
 #endif
 
 
-#endif // TYPES_H
+
